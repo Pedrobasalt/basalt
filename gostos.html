@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#09070d"><title>pra você mot 💜</title><link rel="stylesheet" href="style.css"></head>
+<body><header class="wrap nav"><a class="brand" href="index.html" style="text-decoration:none">KURO<span>MI</span> ♡</a><nav class="nav-links"><a href="lembrancas.html">Lembrancinha</a><a href="index.html">Lily</a></nav></header>
+<main class="wrap">
+<section class="page-heading"><span class="eyebrow">Que bom que veio pegar sua lembrança mb, volte aqui sempre que precisar.</span><h1>Coisinhas que fazem <span class="gradient">você ser você</span></h1><p>Um espacinho só seu pra você revisitar seus momentos. 🎧</p></section>
+<div class="two-col">
+<section class="panel"><h2 class="section-title">🎧 Sua trilha sonora</h2><p class="section-copy">Músicas que lembram você, que dão vontade de cantar ou que marcaram alguma fase especial.</p>
+<div class="music-list">
+<a class="music-link" href="https://open.spotify.com/intl-pt/track/2DgdHcjWmO3qd50RzuBLgZ?si=854b61a6fb334995" target="_blank" rel="noopener noreferrer"><span class="music-icon">♫</span><span><strong>Música Número um</strong><small>Se eu sei bem é essa aqui</small></span><span aria-hidden="true">↗</span></a>
+<a class="music-link" href="https://open.spotify.com/intl-pt/track/09N6k2FECWDBNL7DF5uo3j?si=ade16226ca2542d7" target="_blank" rel="noopener noreferrer"><span class="music-icon">♪</span><span><strong>Música de número dois</strong><small>Essa não pode literalmente faltar no seu celular</small></span><span aria-hidden="true">↗</span></a>
+<a class="music-link" href="https://open.spotify.com/intl-pt/track/3QGsuHI8jO1Rx4JWLUh9jd?si=dd2a257f55d44b87" target="_blank" rel="noopener noreferrer"><span class="music-icon">♫</span><span><strong>Música número três</strong><small>Essa já tocou bastante</small></span><span aria-hidden="true">↗</span></a>
+<div class="file-tip"><strong></strong>Depois você me diz se eu acertei</strong></div></section>
+<section class="panel"><h2 class="section-title">🌙 Momentos bons</h2><p class="section-copy">A lua está muito bonita hoje.</p>
+<div class="timeline">
+<article class="moment"><time>O museu</time><h3>Dia chuvoso mas caloroso</h3><p>Nada vai me fazer esquecer da primeira vez em que saimos, um convite inesperado seu, mas eu queria saber quem você era e foi um dos dias mais divertidos e que não esquecia o quanto era interressante, minha primeira vez na casa das onze janelas, você me mostrou uma página que tiinha codado a mão e dedicado ela, como estou fazendo agora,aquele dia, eu vi que tinha algo diferente em você.  .</p></article>
+<article class="moment"><time>A praia</time><h3>Um dia de paz<p>Você sempre me contou o quanto é apaixonada por água e quando surgiu a oportunidade de irmos, eu não pensei duas vezes, ver você pulando de alegria e contente de mergulhar foi impagavel, ver a expressão de felicidade e o briho nos seus olhos foi de outro nivel, eu entendi pelo fato de você ter dito que não ia em uma praia a anos e não tinha ninguém pra ir com você, mesmo eu sabendo que tinha, mas a pessoa não tomou atitude, resolvi ir porque achei que você merecia esse descanso dos estreses do trabalho e da vida, foi a melhor escolha por ter visto você brilhar mais uma vez.</p></article>
+<article class="moment"><time>O parque <picture></picture></time><h3>Um dia mais que tranquilo</h3><p>Por ultimo mas não menos importante o nosso primeiro piquenique juntos, a ideia era pra ler mas eu tava apenas admirando você, mas foi um dia perfeito e divertido abesssa, eu nem vi a hora passar, tambem não vejo a hora do próximo, prometo ler meu livro ksks. 💜</p></article>
+</div></section>
+</div>
+<section class="panel" style="margin-top:24px"><h2 class="section-title">📸 nossas memórias</h2><p class="section-copy"</p>
+<div class="polaroid-area"><div class="polaroid-track" id="polaroidTrack" aria-live="polite"></div><div class="carousel-controls"><button class="circle-btn" id="prev" aria-label="Foto anterior">←</button><div class="dots" id="dots" aria-label="Posição no carrossel"></div><button class="circle-btn" id="next" aria-label="Próxima foto">→</button></div></div>
+<p class="note">Cada foto guarda um pedacinho da nosssa história Mot. ♡</p></div>
+</section>
+<div class="actions"><a class="button secondary" href="lembrancas.html">← Leia a carta de novo se preferir ♡</a><a class="button" href="index.html"> Quer abrir de novo seu presente?</a></div>
+</main>
+<div class="modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Foto em destaque"><button class="modal-close" id="closeModal">Fechar ✕</button><div class="modal-content" id="modalContent"></div></div>
+<footer class="footer">tudo com amor para o mb 🖤💜</footer>
+<script>
+const photos = [
+  {src:"fotos/aniversariante.jpg", title:"me sinto calmo na sua presença", fallback:"📸"},
+  {src:"fotos/marcou.jpg", title:"Uma noite perfeita que nunca vou esquecer", fallback:"💜"},
+  {src:"fotos/momentos.jpg", title:"Você bem me deixa assim..", fallback:"🎀"}
+];
+let current = 0;
+const track = document.getElementById("polaroidTrack");
+const dots = document.getElementById("dots");
+function makeCard(photo, index, offset) {
+  const card = document.createElement("article");
+  card.className = "polaroid";
+  card.setAttribute("role","button");
+  card.setAttribute("tabindex","0");
+  card.setAttribute("aria-label","Abrir foto: " + photo.title);
+  const frame = document.createElement("div"); frame.className = "polaroid-photo";
+  const img = document.createElement("img"); img.src = photo.src; img.alt = photo.title;
+  img.onerror = () => { img.remove(); const placeholder = document.createElement("div"); placeholder.className = "photo-placeholder"; placeholder.innerHTML = `<span>${photo.fallback}</span>Adicione sua imagem<br><small>${photo.src}</small>`; frame.appendChild(placeholder); };
+  frame.appendChild(img);
+  const caption = document.createElement("div"); caption.className = "polaroid-caption"; caption.textContent = photo.title;
+  card.append(frame,caption);
+  const open = () => openModal(photo);
+  card.addEventListener("click",open);
+  card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+  if(offset !== 0) card.style.opacity = offset === 1 ? ".78" : ".6";
+  return card;
+}
+function render(){
+  track.replaceChildren();
+  const indices = [(current+photos.length-1)%photos.length,current,(current+1)%photos.length];
+  indices.forEach((idx,pos)=>track.appendChild(makeCard(photos[idx],idx,pos-1)));
+  dots.replaceChildren();
+  photos.forEach((photo,i)=>{const dot=document.createElement("span");dot.className="dot"+(i===current?" active":"");dot.title=photo.title;dots.appendChild(dot);});
+}
+function openModal(photo){
+  const modal=document.getElementById("photoModal"), content=document.getElementById("modalContent");
+  content.replaceChildren();
+  const img=document.createElement("img");img.src=photo.src;img.alt=photo.title;
+  img.onerror=()=>{img.remove();const placeholder=document.createElement("div");placeholder.className="photo-placeholder";placeholder.style.minHeight="260px";placeholder.innerHTML=`<span>${photo.fallback}</span>Adicione sua imagem<br><small>${photo.src}</small>`;content.prepend(placeholder);};
+  const caption=document.createElement("div");caption.className="modal-caption";caption.textContent=photo.title;
+  content.append(img,caption);modal.classList.add("open");document.getElementById("closeModal").focus();
+}
+document.getElementById("prev").addEventListener("click",()=>{current=(current+photos.length-1)%photos.length;render();});
+document.getElementById("next").addEventListener("click",()=>{current=(current+1)%photos.length;render();});
+document.getElementById("closeModal").addEventListener("click",()=>document.getElementById("photoModal").classList.remove("open"));
+document.getElementById("photoModal").addEventListener("click",e=>{if(e.target.id==="photoModal")e.currentTarget.classList.remove("open");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("photoModal").classList.remove("open");});
+render();
+</script></body></html>
